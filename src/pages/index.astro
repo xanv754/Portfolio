@@ -1,0 +1,24 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/navbar/navbar.astro';
+import Background from '../components/background/background.astro';
+import Header from '../components/card/header.astro';
+import Terminal from '../components/terminal/terminal.tsx';
+---
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Soy Angyee!</title>
+	</head>
+	<body>
+		<Background />
+		<main class="w-screen max-w-full h-screen">
+			<Navbar />
+			<Header />
+			<Terminal client:load />
+		</main>
+	</body>
+</html>
