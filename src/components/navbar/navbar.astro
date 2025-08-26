@@ -1,0 +1,62 @@
+---
+---
+<nav class="w-full h-fit py-3 flex justify-center items-center">
+    <ul class="w-full flex flex-row justify-center items-center gap-14">
+        <li class="menu-item">
+            <a class="text-white px-2" href="/">Sobre mí</a>
+            <div class="under-line"></div>
+        </li>
+        <!-- <li class="menu-item">
+            <a class="text-white px-2" href="#">Contáctame</a>
+            <div class="under-line"></div>
+        </li> -->
+    </ul>
+</nav>
+<style>
+    .menu-item {
+        width: fit-content;
+        height: fit-content;
+        padding: 0.5rem 0 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 0;
+    }
+
+    .menu-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, var(--color-green), var(--color-transparent-black));
+        opacity: 0;
+        transition: opacity 0.2s ease-in 0.1s;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .menu-item > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .menu-item:hover::before {
+        opacity: 1;
+    }
+
+    .under-line {
+        width: 0%;
+        height: 4px;
+        background: var(--color-white);
+        border: 1px solid var(--color-white);
+        border-radius: 10px;
+        transition: width 0.2s ease-in 0.3s;
+    }
+
+    .menu-item:hover .under-line {
+        width: 100%;
+        transition: width 0.2s ease-out; 
+    }
+</style>
