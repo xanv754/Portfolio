@@ -1,18 +1,15 @@
 import type { CommandInterface } from "../interface";
-import { LBaseCommand } from "./l";
 import { LsCommand } from "./ls";
 
-export interface LInterface {
+export interface LsInterface {
     getListFiles(): string;
 }
 
-export class LCommand implements CommandInterface {
-    private output: LInterface;
+export class LsBaseCommand implements CommandInterface {
+    private output: LsInterface;
 
     constructor(command: string) {
-        if (command === "l") 
-            this.output = new LBaseCommand();
-        else if (command === "ls")
+        if (command === "ls")
             this.output = new LsCommand();
         else 
             throw new Error(`${command}: Command not found`);

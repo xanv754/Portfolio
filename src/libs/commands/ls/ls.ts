@@ -1,7 +1,7 @@
 import { FILES } from "../../../constants/terminal";
-import type { LInterface } from "./command";
+import type { LsInterface } from "./command";
 
-export class LsCommand implements LInterface {
+export class LsCommand implements LsInterface {
     getListFiles(): string {
         let filenames: string[] = Object.values(FILES);
         let output: string = "";
