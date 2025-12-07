@@ -1,7 +1,7 @@
 import type { CommandInterface } from "./commands/interface";
 import { ErrorCommand } from "./commands/error/command";
-import { CatCommand } from "./commands/cat/command";
-import { LCommand } from "./commands/l/command";
+import { CatBaseCommand } from "./commands/cat/command";
+import { LsBaseCommand } from "./commands/ls/command";
 
 export class Command {
     private output!: CommandInterface;
@@ -22,9 +22,9 @@ export class Command {
             let parameter = this.input.split(" ")[1];
 
             if (command === "cat" && parameter)
-                this.output = new CatCommand(parameter);
-            else if (command.startsWith("l"))
-                this.output = new LCommand(command);
+                this.output = new CatBaseCommand(parameter);
+            else if (command.startsWith("ls"))
+                this.output = new LsBaseCommand(command);
             else 
                 throw new Error(`${command}: Command not found`);
 

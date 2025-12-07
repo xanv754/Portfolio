@@ -10,7 +10,7 @@ export interface CatInterface {
     readFile(): string;
 }
 
-export class CatCommand implements CommandInterface {
+export class CatBaseCommand implements CommandInterface {
     private output: CatInterface;
 
     constructor(file: string) {
