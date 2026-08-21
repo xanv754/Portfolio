@@ -26,7 +26,7 @@ export default function Terminal() {
     }
 
     const handlerInputCommand = (input: string) => {
-        if (input == "clear") {
+        if (input.trim() == "clear") {
             setHistory([]);
         } else {
             let command = new Command(input);
