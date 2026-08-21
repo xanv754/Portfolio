@@ -18,18 +18,18 @@ export class Command {
 
     private execute(): void {
         try {
-            let command = this.input.split(" ")[0];
-            let parameter = this.input.split(" ")[1];
+            let tokens = this.input.trim().split(/\s+/);
+            let command = tokens[0];
+            let parameter = tokens[1];
 
             if (command === "cat" && parameter)
                 this.output = new CatBaseCommand(parameter);
             else if (command === "ls")
                 this.output = new LsBaseCommand(command);
-            else 
+            else
                 throw new Error(`${command}: Command not found`);
 
-        } catch (error) {
-            console.error(error);
+        } catch {
             this.output = new ErrorCommand();
         }
     }
