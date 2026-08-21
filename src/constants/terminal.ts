@@ -1,5 +1,3 @@
-import type { HistoryInterface } from "../interface/history";
-
 export const FILES = {
     greeting: "saludo.txt",
     aboutMe: "sobreMi.txt",
@@ -9,8 +7,6 @@ export const FILES = {
 export const PATHTERMINAL = "~ »";
 
 export const NAMETERMINAL = "xanv754@my-space";
-
-export const DEFAULTHISTORY: HistoryInterface[] = []
 
 export const COMMAND_TYPING_SPEED_MS = 80;
 
