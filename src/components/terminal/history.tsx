@@ -48,7 +48,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-row gap-2">
                                     <p className="text-purple-600">{PATHTERMINAL}</p>
-                                    <p id="command" className="text-white">{typeof content === "string" ? content : ""}</p>
+                                    <p className="text-white">{typeof content === "string" ? content : ""}</p>
                                 </div>
                                 <p className="text-gray">{NAMETERMINAL}</p>
                             </div>
