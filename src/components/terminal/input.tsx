@@ -29,7 +29,7 @@ export default function InputTerminal(props: InputTerminalProps) {
         <div id="input-container" className="w-full h-full flex flex-row justify-between" onClick={handleContainerClick}>
             <div className="w-full flex flex-row gap-2">
                 <p className="min-w-fit text-purple-600">{PATHTERMINAL}</p>
-                <input ref={inputRef} id="inputCommand" type="text" className="w-full h-fit focus:outline-none text-white" onKeyDown={handleKeyDown} />
+                <input ref={inputRef} type="text" className="w-full h-fit focus:outline-none text-white" onKeyDown={handleKeyDown} />
             </div>
             <p className="min-w-fit text-gray">{NAMETERMINAL}</p>
         </div>
