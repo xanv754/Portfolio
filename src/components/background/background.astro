@@ -16,9 +16,15 @@
         ctx.fillStyle = '#000';
         ctx.font = `${fontSize}px monospace`;
     
-        const columns = canvas.width / fontSize;
-        const drops = Array.from({ length: columns }, () => 1);
-    
+        let drops = [];
+
+        function resetDrops() {
+            const columns = Math.floor(canvas.width / fontSize);
+            drops = Array.from({ length: columns }, () => 1);
+        }
+
+        resetDrops();
+
         function draw() {
             if (!ctx) return;
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; 
@@ -42,6 +48,7 @@
         window.addEventListener("resize", () => {
             canvas.height = window.innerHeight;
             canvas.width = window.innerWidth;
+            resetDrops();
         });
     });
 </script>
