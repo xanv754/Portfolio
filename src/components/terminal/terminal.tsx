@@ -1,19 +1,26 @@
 import type { HistoryInterface } from "../../interface/history";
-import { FILES } from "../../constants/terminal";
+import { FILES, BOOT_START_DELAY_MS, BOOT_RUNNING_PAUSE_MS, BOOT_NEXT_LINE_PAUSE_MS } from "../../constants/terminal";
 import HistoryTerminal from "./history";
 import InputTerminal from "./input";
 import { Command } from "../../libs/command";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
+interface BootStep {
+    command: string;
+    output: string;
+}
 
 export default function Terminal() {
 
     const [availableInput, setAvailableInput] = useState<boolean>(false);
     const [history, setHistory] = useState<HistoryInterface[]>([]);
 
+    const bootScript = useRef<BootStep[]>([]);
+    const bootIndex = useRef(0);
+
     const handlerHistory = (isCommand: boolean, content: string) => {
         setHistory((prevHistory) => [
-            ...prevHistory, 
+            ...prevHistory,
             { isCommand: isCommand, content: content }
         ]);
     }
@@ -28,23 +35,39 @@ export default function Terminal() {
         }
     }
 
-    const handlerFinishOutput = (state: boolean) => {
-        setAvailableInput(state);
+    const runBootCommand = () => {
+        const step = bootScript.current[bootIndex.current];
+        if (!step) return;
+        handlerHistory(true, step.command);
+        setTimeout(() => handlerHistory(false, step.output), BOOT_RUNNING_PAUSE_MS);
+    }
+
+    const handlerFinishOutput = (finishedTyping: boolean) => {
+        if (!finishedTyping) {
+            setAvailableInput(false);
+            return;
+        }
+
+        bootIndex.current++;
+        if (bootIndex.current < bootScript.current.length) {
+            setTimeout(runBootCommand, BOOT_NEXT_LINE_PAUSE_MS);
+        } else {
+            setAvailableInput(true);
+        }
     }
 
     const startTerminal = () => {
-        let greetingCommand = `cat ${FILES.greeting}`;
-        let cat = new Command(greetingCommand);
-        let catOutput = cat.getOutput();
-        let lsCommand = `ls`;
-        let ls = new Command(lsCommand);
-        let lsOutput = ls.getOutput();
+        const greetingCommand = `cat ${FILES.greeting}`;
+        const greetingOutput = new Command(greetingCommand).getOutput();
+        const lsCommand = `ls`;
+        const lsOutput = new Command(lsCommand).getOutput();
 
-        setTimeout(() => { handlerHistory(true, greetingCommand); }, 700);
-        setTimeout(() => { handlerHistory(false, catOutput); }, 1400);
-        setTimeout(() => { handlerHistory(true, lsCommand); }, 2100);
-        setTimeout(() => { handlerHistory(false, lsOutput); }, 2800);
-        setTimeout(() => { handlerFinishOutput(true); }, 3500);
+        bootScript.current = [
+            { command: greetingCommand, output: greetingOutput },
+            { command: lsCommand, output: lsOutput },
+        ];
+
+        setTimeout(runBootCommand, BOOT_START_DELAY_MS);
     }
 
     useEffect(() => {
