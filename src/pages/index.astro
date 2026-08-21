@@ -9,13 +9,13 @@ import Terminal from '../components/terminal/terminal.tsx';
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Soy Angyee!</title>
 	</head>
 	<body>
 		<Background />
-		<main class="w-screen max-w-full h-screen">
+		<main class="w-screen max-w-full h-dvh flex flex-col overflow-hidden">
 			<Navbar />
 			<Header />
 			<Terminal client:load />

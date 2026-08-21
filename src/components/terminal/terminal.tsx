@@ -52,7 +52,7 @@ export default function Terminal() {
     }, [])
 
     return (
-        <div id="block" className="w-full h-screen bg-black px-4 py-4">
+        <div id="block" className="flex-1 min-h-0 w-full bg-black px-2 py-2 sm:px-4 sm:py-4">
             <section id="terminal" className="h-full border-2 border-green rounded-md px-2 py-2 overflow-y-auto flex flex-col">
                 { history && <HistoryTerminal history={history} onFinishOutput={handlerFinishOutput} /> }
                 { availableInput && <InputTerminal onSubmit={handlerInputCommand} /> }

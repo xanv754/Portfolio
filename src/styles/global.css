@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html, body {
+  overflow-x: hidden;
+}
+
 @theme {
   --color-black: #09090A;
   --color-transparent-black: rgba(9, 9, 10, 0);
