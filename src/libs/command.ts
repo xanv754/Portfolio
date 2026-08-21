@@ -23,7 +23,7 @@ export class Command {
 
             if (command === "cat" && parameter)
                 this.output = new CatBaseCommand(parameter);
-            else if (command.startsWith("ls"))
+            else if (command === "ls")
                 this.output = new LsBaseCommand(command);
             else 
                 throw new Error(`${command}: Command not found`);
