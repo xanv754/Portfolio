@@ -12,7 +12,7 @@ export class Command {
         this.execute();
     }
 
-    public getOutput(): string {
+    public getOutput(): string | string[] {
         return this.output.getOutput();
     }
 

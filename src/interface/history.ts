@@ -1,5 +1,5 @@
 export interface HistoryInterface {
     isCommand: boolean;
-    content: string;
+    content: string | string[];
     animate?: boolean;
 }

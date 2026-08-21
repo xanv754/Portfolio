@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from "react";
 
 interface BootStep {
     command: string;
-    output: string;
+    output: string | string[];
 }
 
 export default function Terminal() {
@@ -18,7 +18,7 @@ export default function Terminal() {
     const bootScript = useRef<BootStep[]>([]);
     const bootIndex = useRef(0);
 
-    const handlerHistory = (isCommand: boolean, content: string, animate: boolean = false) => {
+    const handlerHistory = (isCommand: boolean, content: string | string[], animate: boolean = false) => {
         setHistory((prevHistory) => [
             ...prevHistory,
             { isCommand: isCommand, content: content, animate: animate }

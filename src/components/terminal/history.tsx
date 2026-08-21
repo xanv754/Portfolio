@@ -16,7 +16,8 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
     const [typedLength, setTypedLength] = useState(0);
 
     useEffect(() => {
-        if (!lastItem || !lastItem.animate) return;
+        if (!lastItem || !lastItem.animate || typeof lastItem.content !== "string") return;
+        const fullText = lastItem.content;
 
         props.onFinishOutput(false);
         setTypedLength(0);
@@ -25,7 +26,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
         const interval = setInterval(() => {
             charsShown++;
             setTypedLength(charsShown);
-            if (charsShown >= lastItem.content.length) {
+            if (charsShown >= fullText.length) {
                 clearInterval(interval);
                 props.onFinishOutput(true);
             }
@@ -38,16 +39,24 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
         <section className="w-full h-fit">
             {props.history && props.history.map((item: HistoryInterface, index: number) => {
                 const isTypingThisItem = index === lastIndex && isTypingLast;
-                const content = isTypingThisItem ? item.content.slice(0, typedLength) : item.content;
+                const content = isTypingThisItem && typeof item.content === "string"
+                    ? item.content.slice(0, typedLength)
+                    : item.content;
                 return (
                     <section key={index}>
                         { item.isCommand ?
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-row gap-2">
                                     <p className="text-purple-600">{PATHTERMINAL}</p>
-                                    <p id="command" className="text-white">{content}</p>
+                                    <p id="command" className="text-white">{typeof content === "string" ? content : ""}</p>
                                 </div>
                                 <p className="text-gray">{NAMETERMINAL}</p>
+                            </div>
+                        : Array.isArray(content) ?
+                            <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-1 pl-2">
+                                {content.map((file, fileIndex) => (
+                                    <p key={fileIndex} className="text-white truncate">{file}</p>
+                                ))}
                             </div>
                         :
                             <div className="w-full flex flex-wrap">
