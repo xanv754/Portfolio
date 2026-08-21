@@ -1,4 +1,4 @@
-import { PATHTERMINAL, NAMETERMINAL, TYPING_SPEED_MS } from "../../constants/terminal";
+import { PATHTERMINAL, NAMETERMINAL, COMMAND_TYPING_SPEED_MS } from "../../constants/terminal";
 import type { HistoryInterface } from "../../interface/history";
 import { useEffect, useState } from "react";
 
@@ -11,17 +11,12 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
 
     const lastIndex = props.history.length - 1;
     const lastItem = props.history[lastIndex];
-    const isTypingOutput = !!lastItem && !lastItem.isCommand;
+    const isTypingLast = !!lastItem?.animate;
 
     const [typedLength, setTypedLength] = useState(0);
 
     useEffect(() => {
-        if (!lastItem) return;
-
-        if (lastItem.isCommand) {
-            props.onFinishOutput(false);
-            return;
-        }
+        if (!lastItem || !lastItem.animate) return;
 
         props.onFinishOutput(false);
         setTypedLength(0);
@@ -34,7 +29,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
                 clearInterval(interval);
                 props.onFinishOutput(true);
             }
-        }, TYPING_SPEED_MS);
+        }, COMMAND_TYPING_SPEED_MS);
 
         return () => clearInterval(interval);
     }, [props.history.length]);
@@ -42,7 +37,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
     return (
         <section className="w-full h-fit">
             {props.history && props.history.map((item: HistoryInterface, index: number) => {
-                const isTypingThisItem = index === lastIndex && isTypingOutput;
+                const isTypingThisItem = index === lastIndex && isTypingLast;
                 const content = isTypingThisItem ? item.content.slice(0, typedLength) : item.content;
                 return (
                     <section key={index}>
@@ -50,7 +45,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-row gap-2">
                                     <p className="text-purple-600">{PATHTERMINAL}</p>
-                                    <p id="command" className="text-white">{item.content}</p>
+                                    <p id="command" className="text-white">{content}</p>
                                 </div>
                                 <p className="text-gray">{NAMETERMINAL}</p>
                             </div>

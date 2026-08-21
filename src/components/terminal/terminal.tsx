@@ -1,5 +1,5 @@
 import type { HistoryInterface } from "../../interface/history";
-import { FILES, BOOT_START_DELAY_MS, BOOT_RUNNING_PAUSE_MS, BOOT_NEXT_LINE_PAUSE_MS } from "../../constants/terminal";
+import { FILES, BOOT_START_DELAY_MS, BOOT_NEXT_LINE_PAUSE_MS } from "../../constants/terminal";
 import HistoryTerminal from "./history";
 import InputTerminal from "./input";
 import { Command } from "../../libs/command";
@@ -18,10 +18,10 @@ export default function Terminal() {
     const bootScript = useRef<BootStep[]>([]);
     const bootIndex = useRef(0);
 
-    const handlerHistory = (isCommand: boolean, content: string) => {
+    const handlerHistory = (isCommand: boolean, content: string, animate: boolean = false) => {
         setHistory((prevHistory) => [
             ...prevHistory,
-            { isCommand: isCommand, content: content }
+            { isCommand: isCommand, content: content, animate: animate }
         ]);
     }
 
@@ -38,8 +38,7 @@ export default function Terminal() {
     const runBootCommand = () => {
         const step = bootScript.current[bootIndex.current];
         if (!step) return;
-        handlerHistory(true, step.command);
-        setTimeout(() => handlerHistory(false, step.output), BOOT_RUNNING_PAUSE_MS);
+        handlerHistory(true, step.command, true);
     }
 
     const handlerFinishOutput = (finishedTyping: boolean) => {
@@ -47,6 +46,9 @@ export default function Terminal() {
             setAvailableInput(false);
             return;
         }
+
+        const step = bootScript.current[bootIndex.current];
+        if (step) handlerHistory(false, step.output);
 
         bootIndex.current++;
         if (bootIndex.current < bootScript.current.length) {
