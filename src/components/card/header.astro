@@ -69,6 +69,21 @@
         margin: 0 auto;
     }
 
+	/* Defensive: on very short viewports (e.g. phone landscape),
+	   shrink the header so it can't push the terminal below it
+	   down to an unusable sliver. */
+	@media (max-height: 500px) {
+		#intro {
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+
+		#intro .rounded-full {
+			width: 4rem !important;
+			height: 4rem !important;
+		}
+	}
+
 	.greeting-shadow {
 		text-shadow: 0px 5px 5px var(--color-black);
 		animation: greeting-animation 10s ease-in-out infinite;
