@@ -2,17 +2,17 @@
 Una simple carta de presentación.
 
 ```bash
-npm install
+bun install
 ```
 
 Y 
 
 ```bash
-npm run dev
+bun run dev
 ```
 o 
 
 ```bash
-npm run build
-npm run preview
+bun run build
+bun run preview
 ```
