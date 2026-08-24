@@ -3,6 +3,7 @@ import { CatGreeting } from "./greeting";
 import { CatAboutMe } from "./about";
 import { CatExperience } from "./experience";
 import { CatSocialNetworks } from "./social";
+import { CatHelp } from "./help";
 import { CatEmpty } from "./empty";
 import { FILES } from "../../../constants/terminal";
 
@@ -23,6 +24,8 @@ export class CatBaseCommand implements CommandInterface {
             this.output = new CatExperience();
         else if (file === FILES.socialNetworks)
             this.output = new CatSocialNetworks();
+        else if (file === FILES.help)
+            this.output = new CatHelp();
         else
             this.output = new CatEmpty(file);
     }
