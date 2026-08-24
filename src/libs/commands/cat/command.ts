@@ -2,6 +2,7 @@ import type { CommandInterface } from "../interface";
 import { CatGreeting } from "./greeting";
 import { CatAboutMe } from "./about";
 import { CatExperience } from "./experience";
+import { CatSocialNetworks } from "./social";
 import { CatEmpty } from "./empty";
 import { FILES } from "../../../constants/terminal";
 
@@ -20,7 +21,9 @@ export class CatBaseCommand implements CommandInterface {
             this.output = new CatAboutMe();
         else if (file === FILES.skills)
             this.output = new CatExperience();
-        else 
+        else if (file === FILES.socialNetworks)
+            this.output = new CatSocialNetworks();
+        else
             this.output = new CatEmpty(file);
     }
 

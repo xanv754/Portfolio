@@ -1,3 +1,3 @@
 export interface CommandInterface {
-    getOutput(): string;
+    getOutput(): string | string[];
 }

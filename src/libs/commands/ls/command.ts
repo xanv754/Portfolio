@@ -2,7 +2,7 @@ import type { CommandInterface } from "../interface";
 import { LsCommand } from "./ls";
 
 export interface LsInterface {
-    getListFiles(): string;
+    getListFiles(): string[];
 }
 
 export class LsBaseCommand implements CommandInterface {
@@ -15,7 +15,7 @@ export class LsBaseCommand implements CommandInterface {
             throw new Error(`${command}: Command not found`);
     }
 
-    public getOutput(): string {
+    public getOutput(): string[] {
         return this.output.getListFiles();
     }
 

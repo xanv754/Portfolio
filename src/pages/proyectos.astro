@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar/navbar.astro';
+import Background from '../components/background/background.astro';
+import ProjectCard from '../components/projects/project-card.astro';
+import { PROJECTS } from '../constants/projects';
+---
+<Layout title="Proyectos | Angyee">
+	<Background />
+	<main class="w-screen max-w-full min-h-dvh flex flex-col">
+		<Navbar />
+		<section class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col gap-8">
+			<h1 class="text-white heading-lg">Proyectos</h1>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{PROJECTS.map((project) => (
+					<ProjectCard project={project} />
+				))}
+			</div>
+			<a
+				class="btn self-center"
+				href="https://github.com/xanv754"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Ver más en GitHub
+			</a>
+		</section>
+	</main>
+</Layout>

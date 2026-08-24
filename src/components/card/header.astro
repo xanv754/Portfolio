@@ -1,120 +1,185 @@
 ---
 ---
-<section id="intro" class="w-full h-fit px-8 py-6 flex flex-row justify-between items-center">
-    <div class="w-fit h-fit flex flex-col gap-2">
-        <h1 id="greeting" class="text-white text-4xl font-bold greeting greeting-shadow">Hola, Mundo! Soy Angyee</h1>
-        <div class="w-[500px] bg-black px-3">
-            <h2 id="knowledge" class="text-gray text-xl knowlegde" />
+<section id="intro" class="w-full h-fit shrink-0 px-4 sm:px-8 py-4 flex flex-col lg:flex-row justify-center items-center gap-6 sm:gap-12">
+    <div class="w-fit h-fit flex flex-col gap-2 order-last lg:order-none">
+        <h1 id="greeting" class="text-white heading-lg greeting-shadow flex items-baseline">
+            <span id="greeting-text"></span><span id="greeting-cursor" class="cursor">_</span>
+        </h1>
+        <div class="w-full sm:w-[500px] bg-black px-3 min-h-[1.75rem] flex items-baseline gap-1">
+            <h2 id="knowledge-text" class="text-gray text-xl"></h2><span id="knowledge-cursor" class="cursor">_</span>
         </div>
     </div>
-    <div class="w-72 h-73 rounded-full">
-		<img src="/angyee.jpg" class="w-max h-max rounded-full" />
+    <div class="photo-frame w-32 h-32 sm:w-72 sm:h-72 shrink-0">
+		<img src="/angyee.jpg" alt="Angyee Marín" class="photo-frame__img" />
+		<span class="photo-frame__corner photo-frame__corner--tl" aria-hidden="true"></span>
+		<span class="photo-frame__corner photo-frame__corner--tr" aria-hidden="true"></span>
+		<span class="photo-frame__corner photo-frame__corner--bl" aria-hidden="true"></span>
+		<span class="photo-frame__corner photo-frame__corner--br" aria-hidden="true"></span>
 	</div>
 </section>
 <script is:inline>
-	const textGreeting = document.querySelector('.greeting');
-	const textKnowledge = document.getElementById('knowledge');
+	const GREETING_TEXT = "Hola, Mundo! Soy Angyee";
+	const KNOWLEDGE_PHRASES = ["Desarrolladora de Software", "Analista de Datos", "Hacedora de Soluciones"];
+	const TYPE_SPEED_MS = 70;
+	const DELETE_SPEED_MS = 40;
+	const PHRASE_PAUSE_MS = 2200;
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	function animateConsole() {
-		if (textGreeting) {
-			const str = textGreeting.textContent;
-			const typingSpeed = 100;
-			let i = 0;
+	function typeText(el, text, speed, onDone) {
+		let i = 0;
+		(function step() {
+			el.textContent = text.slice(0, i);
+			i++;
+			if (i <= text.length) setTimeout(step, speed);
+			else if (onDone) onDone();
+		})();
+	}
 
-			function writing() {
-				if ((str) && (i < str.length) && (textGreeting)) {
-					textGreeting.textContent = str.substring(0, i + 1);
-					i++;
-					setTimeout(writing, typingSpeed);
-				}	
-			}
+	function deleteText(el, speed, onDone) {
+		(function step() {
+			const text = el.textContent ?? "";
+			el.textContent = text.slice(0, -1);
+			if (text.length > 1) setTimeout(step, speed);
+			else if (onDone) onDone();
+		})();
+	}
 
-			writing();
+	function animateGreeting(onDone) {
+		const el = document.getElementById('greeting-text');
+		const cursor = document.getElementById('greeting-cursor');
+		if (!el) return;
+
+		if (prefersReducedMotion) {
+			el.textContent = GREETING_TEXT;
+			cursor?.classList.add('cursor-idle');
+			if (onDone) onDone();
+			return;
 		}
+
+		typeText(el, GREETING_TEXT, TYPE_SPEED_MS, () => {
+			cursor?.classList.add('cursor-idle');
+			if (onDone) onDone();
+		});
 	}
 
 	function animateKnowledge() {
-		let knowledges = ["Desarrolladora de Software", "Analista de Datos", "Hacedora de Soluciones"]
-		let knowledgeIndex = 0;
-		let startTime = 3000;
+		const el = document.getElementById('knowledge-text');
+		if (!el) return;
 
-		function startAnimation() {
-			if (textKnowledge) textKnowledge.textContent = knowledges[knowledgeIndex];
-			setTimeout(() => {
-				textKnowledge?.classList.add('knowlegde-animation-start');
-				setTimeout(() => {
-					textKnowledge?.classList.remove('knowlegde-animation-start');
-					textKnowledge?.classList.add('knowlegde-animation-end');
-					setTimeout(() => {
-						textKnowledge?.classList.remove('knowlegde-animation-end');
-						knowledgeIndex = (knowledgeIndex + 1) % knowledges.length;
-						startTime = 300;
-						startAnimation();
-					}, 2500);
-				}, 5000);
-			}, startTime);
+		if (prefersReducedMotion) {
+			el.textContent = KNOWLEDGE_PHRASES[0];
+			return;
 		}
 
-		startAnimation();
+		let index = 0;
+
+		function loop() {
+			typeText(el, KNOWLEDGE_PHRASES[index], TYPE_SPEED_MS, () => {
+				setTimeout(() => {
+					deleteText(el, DELETE_SPEED_MS, () => {
+						index = (index + 1) % KNOWLEDGE_PHRASES.length;
+						loop();
+					});
+				}, PHRASE_PAUSE_MS);
+			});
+		}
+
+		loop();
 	}
 
-	animateConsole();
-	animateKnowledge();
+	animateGreeting(animateKnowledge);
 </script>
 <style>
-	.console {
-        overflow: hidden;
-        border-right: .15em solid white;
-        white-space: nowrap;
-        margin: 0 auto;
-    }
+	/* Defensive: on very short viewports (e.g. phone landscape),
+	   shrink the header so it can't push the terminal below it
+	   down to an unusable sliver. */
+	@media (max-height: 500px) {
+		#intro {
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
 
-	.greeting-shadow {
-		text-shadow: 0px 5px 5px var(--color-black);
-		animation: greeting-animation 10s ease-in-out infinite;
+		#intro .photo-frame {
+			width: 4rem !important;
+			height: 4rem !important;
+		}
 	}
 
-	.knowlegde {
+	.photo-frame {
+		position: relative;
+	}
+
+	.photo-frame__img {
 		width: 100%;
 		height: 100%;
-		position: relative;
-		opacity: 0;
+		object-fit: cover;
+		border-radius: 0.75rem;
+		display: block;
 	}
 
-	.knowlegde-animation-start {
-		animation: knowlegde-animate-start 3s forwards;
+	.photo-frame__corner {
+		position: absolute;
+		width: 1.1rem;
+		height: 1.1rem;
+		border: 2px solid var(--color-green);
+		filter: drop-shadow(0 0 3px var(--color-green));
 	}
 
-	.knowlegde-animation-end {
-		animation: knowlegde-animate-end 3s forwards;
+	.photo-frame__corner--tl {
+		top: -0.45rem;
+		left: -0.45rem;
+		border-right: none;
+		border-bottom: none;
+		border-top-left-radius: 0.35rem;
 	}
 
-	@keyframes greeting-animation {
-		0% { text-shadow: 0px 5px 5px var(--color-black); } 
-		25% { text-shadow: 0px 5px 5px rgb(21, 239, 255); }
-		50% { text-shadow: 0px 5px 5px rgb(255, 2, 171); } 
-		75% { text-shadow: 0px 5px 5px rgb(93, 235, 93); } 
-		100% { text-shadow: 0px 5px 5px var(--color-black); }
+	.photo-frame__corner--tr {
+		top: -0.45rem;
+		right: -0.45rem;
+		border-left: none;
+		border-bottom: none;
+		border-top-right-radius: 0.35rem;
 	}
 
-	@keyframes knowlegde-animate-start {
-		0% {
-			opacity: 0;
-			left: 50%;
-		} 100% {
-			opacity: 1;
-			left: 0%;
-		}
+	.photo-frame__corner--bl {
+		bottom: -0.45rem;
+		left: -0.45rem;
+		border-right: none;
+		border-top: none;
+		border-bottom-left-radius: 0.35rem;
 	}
 
-	@keyframes knowlegde-animate-end {
-		0% {
-			opacity: 1;
-			left: 0%;
-		} 100% {
-			opacity: 0;
-			left: 50%;
-		}
+	.photo-frame__corner--br {
+		bottom: -0.45rem;
+		right: -0.45rem;
+		border-left: none;
+		border-top: none;
+		border-bottom-right-radius: 0.35rem;
 	}
 
+	.greeting-shadow {
+		animation: glow-pulse 4s ease-in-out infinite;
+	}
+
+	.cursor {
+		display: inline-block;
+		color: var(--color-green);
+		margin-left: 0.1em;
+		animation: blink 0.9s steps(1) infinite;
+	}
+
+	.cursor-idle {
+		opacity: 0.5;
+		animation: blink 0.9s steps(1) infinite;
+	}
+
+	@keyframes glow-pulse {
+		0%, 100% { text-shadow: 0 0 6px var(--color-green); }
+		50% { text-shadow: 0 0 16px var(--color-green); }
+	}
+
+	@keyframes blink {
+		0%, 50% { opacity: 1; }
+		50.01%, 100% { opacity: 0; }
+	}
 </style>
