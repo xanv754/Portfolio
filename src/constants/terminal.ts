@@ -3,6 +3,7 @@ export const FILES = {
     aboutMe: "sobreMi.txt",
     skills: "experiencia.txt",
     socialNetworks: "redes.txt",
+    help: "ayuda.txt",
 }
 
 export const COMMANDS = ["cat", "clear", "ls"];
