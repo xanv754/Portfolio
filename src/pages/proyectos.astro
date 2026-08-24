@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/navbar/navbar.astro';
+import Background from '../components/background/background.astro';
+import ProjectCard from '../components/projects/project-card.astro';
+import { PROJECTS } from '../constants/projects';
+---
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Proyectos | Angyee</title>
+	</head>
+	<body>
+		<Background />
+		<main class="w-screen max-w-full min-h-dvh flex flex-col">
+			<Navbar />
+			<section class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col gap-8">
+				<h1 class="text-white text-2xl sm:text-4xl font-bold">Proyectos</h1>
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+					{PROJECTS.map((project) => (
+						<ProjectCard project={project} />
+					))}
+				</div>
+				<a
+					class="self-center text-green border border-green rounded-md px-4 py-2 hover:bg-green/10 transition-colors"
+					href="https://github.com/xanv754"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Ver más en GitHub
+				</a>
+			</section>
+		</main>
+	</body>
+</html>
