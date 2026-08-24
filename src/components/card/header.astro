@@ -1,6 +1,6 @@
 ---
 ---
-<section id="intro" class="w-full h-fit shrink-0 px-4 sm:px-8 py-4 flex flex-col sm:flex-row justify-center gap-6 sm:gap-0 sm:justify-between items-center">
+<section id="intro" class="w-full h-fit shrink-0 px-4 sm:px-8 py-4 flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-12">
     <div class="w-fit h-fit flex flex-col gap-2 order-last sm:order-none">
         <h1 id="greeting" class="text-white heading-lg greeting-shadow flex items-baseline">
             <span id="greeting-text"></span><span id="greeting-cursor" class="cursor">_</span>
@@ -9,8 +9,12 @@
             <h2 id="knowledge-text" class="text-gray text-xl"></h2><span id="knowledge-cursor" class="cursor">_</span>
         </div>
     </div>
-    <div class="w-32 h-32 sm:w-72 sm:h-73 rounded-full shrink-0 overflow-hidden">
-		<img src="/angyee.jpg" alt="Angyee Marín" class="w-full h-full object-cover" />
+    <div class="photo-frame w-32 h-32 sm:w-72 sm:h-72 shrink-0">
+		<img src="/angyee.jpg" alt="Angyee Marín" class="photo-frame__img" />
+		<span class="photo-frame__corner photo-frame__corner--tl" aria-hidden="true"></span>
+		<span class="photo-frame__corner photo-frame__corner--tr" aria-hidden="true"></span>
+		<span class="photo-frame__corner photo-frame__corner--bl" aria-hidden="true"></span>
+		<span class="photo-frame__corner photo-frame__corner--br" aria-hidden="true"></span>
 	</div>
 </section>
 <script is:inline>
@@ -95,10 +99,62 @@
 			padding-bottom: 0.25rem;
 		}
 
-		#intro .rounded-full {
+		#intro .photo-frame {
 			width: 4rem !important;
 			height: 4rem !important;
 		}
+	}
+
+	.photo-frame {
+		position: relative;
+	}
+
+	.photo-frame__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0.75rem;
+		display: block;
+	}
+
+	.photo-frame__corner {
+		position: absolute;
+		width: 1.1rem;
+		height: 1.1rem;
+		border: 2px solid var(--color-green);
+		filter: drop-shadow(0 0 3px var(--color-green));
+	}
+
+	.photo-frame__corner--tl {
+		top: -0.45rem;
+		left: -0.45rem;
+		border-right: none;
+		border-bottom: none;
+		border-top-left-radius: 0.35rem;
+	}
+
+	.photo-frame__corner--tr {
+		top: -0.45rem;
+		right: -0.45rem;
+		border-left: none;
+		border-bottom: none;
+		border-top-right-radius: 0.35rem;
+	}
+
+	.photo-frame__corner--bl {
+		bottom: -0.45rem;
+		left: -0.45rem;
+		border-right: none;
+		border-top: none;
+		border-bottom-left-radius: 0.35rem;
+	}
+
+	.photo-frame__corner--br {
+		bottom: -0.45rem;
+		right: -0.45rem;
+		border-left: none;
+		border-top: none;
+		border-bottom-right-radius: 0.35rem;
 	}
 
 	.greeting-shadow {
