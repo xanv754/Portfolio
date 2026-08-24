@@ -19,7 +19,7 @@ const { project } = Astro.props;
         )}
     </div>
     <div class="project-card__body">
-        <h2 class="project-card__title">{project.name}</h2>
+        <h2 class="project-card__title heading-sm">{project.name}</h2>
         <p class="project-card__description">{project.description}</p>
         <a class="project-card__link" href={project.repo} target="_blank" rel="noopener noreferrer">
             Ver repositorio →
@@ -32,7 +32,7 @@ const { project } = Astro.props;
         flex-direction: column;
         background: rgba(9, 9, 10, 0.75);
         border: 1px solid var(--color-green);
-        border-radius: 0.5rem;
+        border-radius: var(--radius-lg);
         box-shadow: 0 0 6px rgba(0, 255, 0, 0.25), inset 0 0 20px rgba(0, 255, 0, 0.03);
         overflow: hidden;
         transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
@@ -76,8 +76,6 @@ const { project } = Astro.props;
 
     .project-card__title {
         color: var(--color-white);
-        font-size: 1.125rem;
-        font-weight: 700;
     }
 
     .project-card__description {

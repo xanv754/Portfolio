@@ -1,27 +1,15 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar/navbar.astro';
 import Background from '../components/background/background.astro';
 import Header from '../components/card/header.astro';
 import Terminal from '../components/terminal/terminal.tsx';
 ---
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-		<title>Soy Angyee!</title>
-	</head>
-	<body>
-		<Background />
-		<main class="w-screen max-w-full h-dvh flex flex-col overflow-hidden">
-			<Navbar />
-			<Header />
-			<Terminal client:load />
-		</main>
-	</body>
-</html>
+<Layout title="Soy Angyee!">
+	<Background />
+	<main class="w-screen max-w-full h-dvh flex flex-col overflow-hidden">
+		<Navbar />
+		<Header />
+		<Terminal client:load />
+	</main>
+</Layout>

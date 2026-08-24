@@ -25,6 +25,8 @@
 
         resetDrops();
 
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         function draw() {
             if (!ctx) return;
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; 
@@ -44,7 +46,11 @@
             }
         }
     
-        setInterval(draw, 35);
+        if (prefersReducedMotion) {
+            draw();
+        } else {
+            setInterval(draw, 35);
+        }
         window.addEventListener("resize", () => {
             canvas.height = window.innerHeight;
             canvas.width = window.innerWidth;

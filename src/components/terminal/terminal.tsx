@@ -1,5 +1,5 @@
 import type { HistoryInterface } from "../../interface/history";
-import { FILES, BOOT_START_DELAY_MS, BOOT_NEXT_LINE_PAUSE_MS } from "../../constants/terminal";
+import { FILES, NAMETERMINAL, BOOT_START_DELAY_MS, BOOT_NEXT_LINE_PAUSE_MS } from "../../constants/terminal";
 import HistoryTerminal from "./history";
 import InputTerminal from "./input";
 import { Command } from "../../libs/command";
@@ -77,10 +77,18 @@ export default function Terminal() {
     }, [])
 
     return (
-        <div id="block" className="flex-1 min-h-0 w-full bg-black px-2 py-2 sm:px-4 sm:py-4">
-            <section id="terminal" className="h-full border-2 border-green rounded-md px-2 py-2 overflow-y-auto flex flex-col font-mono">
-                { history && <HistoryTerminal history={history} onFinishOutput={handlerFinishOutput} /> }
-                { availableInput && <InputTerminal onSubmit={handlerInputCommand} /> }
+        <div id="block" className="flex-1 min-h-0 w-full bg-black/85 px-2 py-2 sm:px-4 sm:py-4">
+            <section id="terminal" className="h-full bg-black border-2 border-green rounded-md overflow-hidden flex flex-col font-mono terminal-glow">
+                <div className="flex items-center gap-2 px-3 py-2 border-b border-green/40 bg-green/5 shrink-0">
+                    <span className="w-2.5 h-2.5 rounded-full bg-green/70" aria-hidden="true"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-gray/70" aria-hidden="true"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-white/40" aria-hidden="true"></span>
+                    <span className="ml-2 text-gray text-xs truncate">{NAMETERMINAL}: ~</span>
+                </div>
+                <div className="flex-1 min-h-0 overflow-y-auto px-2 py-2 flex flex-col">
+                    { history && <HistoryTerminal history={history} onFinishOutput={handlerFinishOutput} /> }
+                    { availableInput && <InputTerminal onSubmit={handlerInputCommand} /> }
+                </div>
             </section>
         </div>
     )

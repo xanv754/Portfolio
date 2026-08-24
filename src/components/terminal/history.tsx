@@ -14,7 +14,7 @@ const IS_URL_REGEX = /^https?:\/\//;
 function renderTextWithLinks(text: string, keyPrefix: string) {
     return text.split(URL_REGEX).map((part, index) =>
         IS_URL_REGEX.test(part)
-            ? <a key={`${keyPrefix}-${index}`} href={part} target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-600">{part}</a>
+            ? <a key={`${keyPrefix}-${index}`} href={part} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">{part}</a>
             : <span key={`${keyPrefix}-${index}`}>{part}</span>
     );
 }
@@ -42,6 +42,13 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
         const fullText = lastItem.content;
 
         props.onFinishOutput(false);
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            setTypedLength(fullText.length);
+            props.onFinishOutput(true);
+            return;
+        }
+
         setTypedLength(0);
 
         let charsShown = 0;
@@ -69,7 +76,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
                         { item.isCommand ?
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-row gap-2">
-                                    <p className="text-purple-600">{PATHTERMINAL}</p>
+                                    <p className="text-accent">{PATHTERMINAL}</p>
                                     <p className="text-white">{typeof content === "string" ? content : ""}</p>
                                 </div>
                                 <p className="text-gray">{NAMETERMINAL}</p>

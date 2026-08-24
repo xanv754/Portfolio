@@ -1,35 +1,23 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar/navbar.astro';
 import Background from '../components/background/background.astro';
 import ContactForm from '../components/contact/contact-form.astro';
 import { CONTACT_EMAIL } from '../constants/contact';
 ---
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-		<title>Contáctame | Angyee</title>
-	</head>
-	<body>
-		<Background />
-		<main class="w-screen max-w-full min-h-dvh flex flex-col">
-			<Navbar />
-			<section class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col items-center gap-4">
-				<h1 class="text-white text-2xl sm:text-4xl font-bold self-center sm:self-start sm:max-w-[40rem] sm:w-full">Contáctame</h1>
-				<p class="text-gray max-w-[40rem] w-full">
-					¿Tienes un proyecto en mente o alguna pregunta? Escríbeme un mensaje y te responderé a la brevedad.
-				</p>
-				<ContactForm />
-				<a class="text-green text-sm hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
-					{CONTACT_EMAIL}
-				</a>
-			</section>
-		</main>
-	</body>
-</html>
+<Layout title="Contáctame | Angyee">
+	<Background />
+	<main class="w-screen max-w-full min-h-dvh flex flex-col">
+		<Navbar />
+		<section class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col items-center gap-4">
+			<h1 class="text-white heading-lg self-center sm:self-start sm:max-w-[var(--content-width)] sm:w-full">Contáctame</h1>
+			<p class="text-gray max-w-[var(--content-width)] w-full">
+				¿Tienes un proyecto en mente o alguna pregunta? Escríbeme un mensaje y te responderé a la brevedad.
+			</p>
+			<ContactForm />
+			<a class="text-green text-sm hover:underline" href={`mailto:${CONTACT_EMAIL}`}>
+				{CONTACT_EMAIL}
+			</a>
+		</section>
+	</main>
+</Layout>

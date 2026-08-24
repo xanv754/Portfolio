@@ -2,7 +2,7 @@
 ---
 <section id="intro" class="w-full h-fit shrink-0 px-4 sm:px-8 py-4 flex flex-col sm:flex-row justify-center gap-6 sm:gap-0 sm:justify-between items-center">
     <div class="w-fit h-fit flex flex-col gap-2 order-last sm:order-none">
-        <h1 id="greeting" class="text-white text-2xl sm:text-4xl font-bold greeting-shadow flex items-baseline">
+        <h1 id="greeting" class="text-white heading-lg greeting-shadow flex items-baseline">
             <span id="greeting-text"></span><span id="greeting-cursor" class="cursor">_</span>
         </h1>
         <div class="w-full sm:w-[500px] bg-black px-3 min-h-[1.75rem] flex items-baseline gap-1">
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="w-32 h-32 sm:w-72 sm:h-73 rounded-full shrink-0 overflow-hidden">
-		<img src="/angyee.jpg" class="w-full h-full object-cover" />
+		<img src="/angyee.jpg" alt="Angyee Marín" class="w-full h-full object-cover" />
 	</div>
 </section>
 <script is:inline>
@@ -19,6 +19,7 @@
 	const TYPE_SPEED_MS = 70;
 	const DELETE_SPEED_MS = 40;
 	const PHRASE_PAUSE_MS = 2200;
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	function typeText(el, text, speed, onDone) {
 		let i = 0;
@@ -43,6 +44,14 @@
 		const el = document.getElementById('greeting-text');
 		const cursor = document.getElementById('greeting-cursor');
 		if (!el) return;
+
+		if (prefersReducedMotion) {
+			el.textContent = GREETING_TEXT;
+			cursor?.classList.add('cursor-idle');
+			if (onDone) onDone();
+			return;
+		}
+
 		typeText(el, GREETING_TEXT, TYPE_SPEED_MS, () => {
 			cursor?.classList.add('cursor-idle');
 			if (onDone) onDone();
@@ -52,6 +61,12 @@
 	function animateKnowledge() {
 		const el = document.getElementById('knowledge-text');
 		if (!el) return;
+
+		if (prefersReducedMotion) {
+			el.textContent = KNOWLEDGE_PHRASES[0];
+			return;
+		}
+
 		let index = 0;
 
 		function loop() {
@@ -99,7 +114,7 @@
 
 	.cursor-idle {
 		opacity: 0.5;
-		animation: blink 1.4s steps(1) infinite;
+		animation: blink 0.9s steps(1) infinite;
 	}
 
 	@keyframes glow-pulse {

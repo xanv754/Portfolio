@@ -18,7 +18,7 @@ import { CONTACT_EMAIL } from "../../constants/contact";
         <label for="contact-message">Mensaje</label>
         <textarea id="contact-message" name="message" required rows="6" placeholder="Escribe tu mensaje aquí..."></textarea>
     </div>
-    <button type="submit" class="contact-form__submit">Enviar mensaje →</button>
+    <button type="submit" class="btn contact-form__submit">Enviar mensaje →</button>
 </form>
 <script is:inline define:vars={{ CONTACT_EMAIL }}>
     const form = document.getElementById('contact-form');
@@ -43,11 +43,11 @@ import { CONTACT_EMAIL } from "../../constants/contact";
         flex-direction: column;
         gap: 1.25rem;
         width: 100%;
-        max-width: 40rem;
+        max-width: var(--content-width);
         padding: 1.5rem;
         background: rgba(9, 9, 10, 0.75);
         border: 1px solid var(--color-green);
-        border-radius: 0.5rem;
+        border-radius: var(--radius-lg);
         box-shadow: 0 0 6px rgba(0, 255, 0, 0.25), inset 0 0 20px rgba(0, 255, 0, 0.03);
     }
 
@@ -66,7 +66,7 @@ import { CONTACT_EMAIL } from "../../constants/contact";
     .contact-form__field textarea {
         background: rgba(0, 255, 0, 0.03);
         border: 1px dashed rgba(0, 255, 0, 0.4);
-        border-radius: 0.25rem;
+        border-radius: var(--radius-sm);
         padding: 0.6rem 0.75rem;
         color: var(--color-white);
         font-family: inherit;
@@ -87,14 +87,5 @@ import { CONTACT_EMAIL } from "../../constants/contact";
 
     .contact-form__submit {
         align-self: flex-start;
-        color: var(--color-green);
-        border: 1px solid var(--color-green);
-        border-radius: 0.375rem;
-        padding: 0.6rem 1.25rem;
-        transition: background-color 0.2s ease-out;
-    }
-
-    .contact-form__submit:hover {
-        background: rgba(0, 255, 0, 0.1);
     }
 </style>

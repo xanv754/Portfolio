@@ -103,8 +103,14 @@ export default function InputTerminal(props: InputTerminalProps) {
     return (
         <div id="input-container" className="w-full h-full flex flex-row justify-between" onClick={handleContainerClick}>
             <div className="w-full flex flex-row gap-2">
-                <p className="min-w-fit text-purple-600">{PATHTERMINAL}</p>
-                <input ref={inputRef} type="text" className="w-full h-fit focus:outline-none text-white" onKeyDown={handleKeyDown} />
+                <p className="min-w-fit text-accent">{PATHTERMINAL}</p>
+                <input
+                    ref={inputRef}
+                    type="text"
+                    aria-label="Comando de terminal"
+                    className="w-full h-fit focus:outline-none text-white caret-green"
+                    onKeyDown={handleKeyDown}
+                />
             </div>
             <p className="min-w-fit text-gray">{NAMETERMINAL}</p>
         </div>
