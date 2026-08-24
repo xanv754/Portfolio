@@ -8,8 +8,6 @@ Refactorizar, añadir mejoras y fortalecer mi portafolio para poder presentarlo 
 Intentando darle mi personalidad sobre mi portafolio, intenté hacer un diseño cibernético, teniendo de fondo la "matrix", y creando un simulador de terminal de linux para leer los archivos que tienen información sobre mí.
 
 # Por Crear
-- Agregar al saludo de la terminal, la especificación del comando "cat" para leer los archivos.
-- Agregar el comando "pwd"
 - Agregar el comando "echo"
 - Agregar la estructura de carpetas para "navegar". Pero cada vez que quiera entrar en una carpeta, le saldrá el mensaje de que no tiene permisos.
 - Agregar el comando "sudo", que pida contraseña, pero que siempre la contraseña esté mala.
