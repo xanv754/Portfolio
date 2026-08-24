@@ -77,7 +77,7 @@ export default function Terminal() {
     }, [])
 
     return (
-        <div id="block" className="flex-1 min-h-0 w-full bg-black/85 px-2 py-2 sm:px-4 sm:py-4">
+        <div id="block" className="h-[70vh] sm:h-auto sm:flex-1 sm:min-h-0 w-full bg-black/85 px-2 py-2 sm:px-4 sm:py-4">
             <section id="terminal" className="h-full bg-black border-2 border-green rounded-md overflow-hidden flex flex-col font-mono terminal-glow">
                 <div className="flex items-center gap-2 px-3 py-2 border-b border-green/40 bg-green/5 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-green/70" aria-hidden="true"></span>
