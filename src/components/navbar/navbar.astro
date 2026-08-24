@@ -11,10 +11,10 @@ const currentPath = Astro.url.pathname;
             <a class="text-white px-2" href="/proyectos">Proyectos</a>
             <div class="under-line"></div>
         </li>
-        <!-- <li class="menu-item">
-            <a class="text-white px-2" href="#">Contáctame</a>
+        <li class:list={["menu-item", { active: currentPath === "/contactame" }]}>
+            <a class="text-white px-2" href="/contactame">Contáctame</a>
             <div class="under-line"></div>
-        </li> -->
+        </li>
     </ul>
 </nav>
 <style>
