@@ -4,10 +4,17 @@ html, body {
   overflow-x: hidden;
 }
 
+body {
+  font-family: var(--font-sans);
+}
+
 @theme {
   --color-black: #09090A;
   --color-transparent-black: rgba(9, 9, 10, 0);
   --color-white: #F3EFF5;
   --color-gray: #747474;
   --color-green: #0F0;
+
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 }
