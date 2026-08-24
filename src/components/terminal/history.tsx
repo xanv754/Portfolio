@@ -82,7 +82,7 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
                                 <p className="text-gray">{NAMETERMINAL}</p>
                             </div>
                         : Array.isArray(content) ?
-                            <div className="w-full grid grid-cols-[repeat(2,max-content)] sm:grid-cols-[repeat(3,max-content)] md:grid-cols-[repeat(4,max-content)] gap-x-4 gap-y-0 pl-2">
+                            <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(10rem,max-content))] gap-x-4 gap-y-0 pl-2">
                                 {content.map((file, fileIndex) => (
                                     <p key={fileIndex} className="text-white flex items-center gap-1.5">
                                         <FileIcon filename={file} />
