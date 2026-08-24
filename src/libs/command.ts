@@ -2,6 +2,7 @@ import type { CommandInterface } from "./commands/interface";
 import { ErrorCommand } from "./commands/error/command";
 import { CatBaseCommand } from "./commands/cat/command";
 import { LsBaseCommand } from "./commands/ls/command";
+import { PwdBaseCommand } from "./commands/pwd/command";
 
 export class Command {
     private output!: CommandInterface;
@@ -26,6 +27,8 @@ export class Command {
                 this.output = new CatBaseCommand(parameter);
             else if (command === "ls")
                 this.output = new LsBaseCommand(command);
+            else if (command === "pwd")
+                this.output = new PwdBaseCommand(command);
             else
                 throw new Error(`${command}: Command not found`);
 

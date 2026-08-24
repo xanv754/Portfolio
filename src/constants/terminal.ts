@@ -6,7 +6,9 @@ export const FILES = {
     help: "ayuda.txt",
 }
 
-export const COMMANDS = ["cat", "clear", "ls"];
+export const COMMANDS = ["cat", "clear", "ls", "pwd"];
+
+export const HOME_PATH = "/home/xanv754";
 
 export const PATHTERMINAL = "~ »";
 
