@@ -5,6 +5,8 @@ export const FILES = {
     socialNetworks: "redes.txt",
 }
 
+export const COMMANDS = ["cat", "clear", "ls"];
+
 export const PATHTERMINAL = "~ »";
 
 export const NAMETERMINAL = "xanv754@my-space";
