@@ -3,6 +3,7 @@ import { ErrorCommand } from "./commands/error/command";
 import { CatBaseCommand } from "./commands/cat/command";
 import { LsBaseCommand } from "./commands/ls/command";
 import { PwdBaseCommand } from "./commands/pwd/command";
+import { EchoBaseCommand } from "./commands/echo/command";
 
 export class Command {
     private output!: CommandInterface;
@@ -19,9 +20,11 @@ export class Command {
 
     private execute(): void {
         try {
-            let tokens = this.input.trim().split(/\s+/);
+            let trimmedInput = this.input.trim();
+            let tokens = trimmedInput.split(/\s+/);
             let command = tokens[0];
             let parameter = tokens[1];
+            let remainder = trimmedInput.slice(command.length).trim();
 
             if (command === "cat" && parameter)
                 this.output = new CatBaseCommand(parameter);
@@ -29,6 +32,8 @@ export class Command {
                 this.output = new LsBaseCommand(command);
             else if (command === "pwd")
                 this.output = new PwdBaseCommand(command);
+            else if (command === "echo")
+                this.output = new EchoBaseCommand(remainder);
             else
                 throw new Error(`${command}: Command not found`);
 
