@@ -7,6 +7,27 @@ interface HistoryTerminalProps {
     onFinishOutput: (state: boolean) => void;
 }
 
+const URL_REGEX = /(https?:\/\/[^\s]+)/g;
+const IS_URL_REGEX = /^https?:\/\//;
+
+function renderTextWithLinks(text: string, keyPrefix: string) {
+    return text.split(URL_REGEX).map((part, index) =>
+        IS_URL_REGEX.test(part)
+            ? <a key={`${keyPrefix}-${index}`} href={part} target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-600">{part}</a>
+            : <span key={`${keyPrefix}-${index}`}>{part}</span>
+    );
+}
+
+function renderLines(text: string, keyPrefix: string) {
+    return text
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0)
+        .map((line, lineIndex) => (
+            <p key={`${keyPrefix}-${lineIndex}`} className="text-white pl-2">{renderTextWithLinks(line, `${keyPrefix}-${lineIndex}`)}</p>
+        ));
+}
+
 export default function HistoryTerminal(props: HistoryTerminalProps) {
 
     const lastIndex = props.history.length - 1;
@@ -59,8 +80,8 @@ export default function HistoryTerminal(props: HistoryTerminalProps) {
                                 ))}
                             </div>
                         :
-                            <div className="w-full flex flex-wrap">
-                                <p className="text-white pl-2">{content}</p>
+                            <div className="w-full flex flex-col">
+                                {typeof content === "string" ? renderLines(content, `content-${index}`) : content}
                             </div>
                         }
                     </section>
