@@ -8,36 +8,35 @@ Refactorizar, añadir mejoras y fortalecer mi portafolio para poder presentarlo 
 Intentando darle mi personalidad sobre mi portafolio, intenté hacer un diseño cibernético, teniendo de fondo la "matrix", y creando un simulador de terminal de linux para leer los archivos que tienen información sobre mí.
 
 # Por Crear
-1. Nueva pestaña de menú:
-    Quiero hacer un apartado de "Proyectos" donde pueda ir colocando en tarjetas todos los proyectos que he realizado, y que dentro pueda dar un contexto de la necesidad que soluciona mi proyecto, así como fotos de muestra (o videos gif). Además dejar al final el repositorio mío.
-
-    Mi Github es: https://github.com/xanv754. 
-
-    Los proyectos públicos actualmente que quiero mostrar serían:
-
-    - Convx: Transformador de archivos de gran tamaño .csv a .xlsx.
-        URL: https://github.com/xanv754/ConvX
-
-    - Sharkdown: Convertidor sencillo de manuscritos a markdown utilizando IA.
-        URL: https://github.com/xanv754/sharkdown
-
-    - ExcelTableKit: Personalizador rápido de estilos para tablas sencillas en excel.
-        URL: https://github.com/xanv754/ExcelTableKit
-
-    - Interface-Change-Monitor: Herramienta de monitoreo y seguimiento de cambios en las interfaces de red utilizando el protocolo SNMP.
-        URL: https://github.com/xanv754/Interface-Change-Monitor
-
-2. Añadir mis redes en un pie de página.
-3. Añadir un pestaña para enviarme un correo para ponerse en contacto conmigo.
-4. Añadir iconos para los archivos mostrados por "ls" para que se entiendan que son archivos. Algo como lo que hace la librería de linux "lsd"
-
-# Refactorizar
-- Quiero hacer mi portafolio responsive.
-- Mejoramiento de performance.
-- Cambiar el favicon.
+- Agregar al saludo de la terminal, la especificación del comando "cat" para leer los archivos.
+- Agregar el comando "pwd"
+- Agregar el comando "echo"
+- Agregar la estructura de carpetas para "navegar". Pero cada vez que quiera entrar en una carpeta, le saldrá el mensaje de que no tiene permisos.
+- Agregar el comando "sudo", que pida contraseña, pero que siempre la contraseña esté mala.
+- Agregar el comando "man" para los comandos actuales existentes.
+- Agregar las banderillas básicas del comando "ls"
+- Agregar el comando "touch". Puedes crear archivos nuevos, pero todo eso se borraría al refrescar pantalla.
 
 # Stack
 Framework: Astro.
 Lenguaje: Typescript.
 Compilador: Bun.
 Librerías: React, Tailwind.
+
+# Reglas de Código
+- Sigue el principio KISS.
+- Trabajando bajo el paradigma orientado a objetos.
+- Siempre intenta seguir los patrones de diseño conocidos para crear soluciones.
+- Todo el código debe ser en inglés.
+- No deben existir magic strings. Debes reunir todas las constantes en los scripts existentes para ello.
+- No debes cambiar código existente funcionando sin avisar en el plan que se cambiarían.
+- No cambiar el funcionamiento existente si no afecta al objetivo de la sesión.
+- Avisar de bugs o advertencias al encontrarse.
+- Validar siempre al final que todo siga funcionando.
+- Siempre diseñar responsivamente.
+
+# Reglas para commmit
+- Seguir las convenciones estandarizadas.
+- No agregar información innecesaria en la descripción de los commita (ej. autor, archivos específicos, detalles menores, etc...).
+- Siempre crear los commits en inglés.
+- No hacer push.
