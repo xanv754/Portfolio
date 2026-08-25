@@ -20,7 +20,7 @@ const { project } = Astro.props;
     </div>
     <div class="project-card__body">
         <h2 class="project-card__title heading-sm">{project.name}</h2>
-        <p class="project-card__description">{project.description}</p>
+        <p class="project-card__description">{project.description.es}</p>
         <a class="project-card__link" href={project.repo} target="_blank" rel="noopener noreferrer">
             Ver repositorio →
         </a>
