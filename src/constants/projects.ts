@@ -62,4 +62,14 @@ export const PROJECTS: Project[] = [
         repo: "https://github.com/xanv754/bcv-rate-tracker",
         image: "/projects/bcv-rate-tracker.png",
     },
+    {
+        id: "info-fat",
+        name: "Info-Fat",
+        description: {
+            es: "Herramienta ligera y eficiente orientada a ingenieros de soporte de telecomunicaciones y redes. El sistema procesa archivos de texto masivos con configuraciones de equipos OLT para extraer, estructurar y presentar la información de las cajas FAT de forma intuitiva.",
+            en: "A lightweight and efficient tool aimed at telecommunications and network support engineers. The system processes massive text files containing OLT equipment configurations to extract, structure, and present FAT box information in an intuitive way.",
+        },
+        repo: "https://github.com/xanv754/Info-FAT",
+        image: "/projects/info-fat.png",
+    },
 ];
